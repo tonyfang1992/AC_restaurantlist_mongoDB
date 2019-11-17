@@ -5,6 +5,8 @@ const mongoose = require('mongoose')   //載入 mongoose
 const exphbs = require('express-handlebars')
 // 引用 body-parser
 const bodyParser = require('body-parser');
+// 引用 method-override
+const methodOverride = require('method-override')
 // 設定 bodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 // ...
@@ -16,6 +18,8 @@ const db = mongoose.connection
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+// 設定 method-override
+app.use(methodOverride('_method'))
 app.use(express.static('public'))
 
 //連線異常
@@ -90,7 +94,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
   })
 })
 // 修改 Todo
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id/edit', (req, res) => {
   RestaurantlistDB.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.name = req.body.name
@@ -110,7 +114,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
 })
 
 // 刪除 Todo
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id/delete', (req, res) => {
   RestaurantlistDB.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.remove(err => {

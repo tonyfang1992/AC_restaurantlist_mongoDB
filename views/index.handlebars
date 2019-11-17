@@ -42,7 +42,8 @@
                   aria-pressed="true">查看</a>
                 <a href="/restaurants/{{this.id}}/edit" class="btn btn-primary  active" role="button"
                   aria-pressed="true">修改</a>
-                <form action="/restaurants/{{{this.id}}}/delete" method="POST" style="display: inline-block;">
+                <form action="/restaurants/{{{this.id}}}/delete?_method=DELETE" method="POST"
+                  style="display: inline-block;">
                   <button type="submit" class="btn btn-danger">刪除</button>
                 </form>
               </div>
