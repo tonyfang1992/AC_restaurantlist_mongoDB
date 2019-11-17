@@ -83,18 +83,42 @@ app.get('/restaurants/:id', (req, res) => {
 })
 
 // 修改 Todo 頁面
-app.get('/todos/:id/edit', (req, res) => {
-  res.send('修改 Todo 頁面')
+app.get('/restaurants/:id/edit', (req, res) => {
+  RestaurantlistDB.findById(req.params.id, (err, restaurant) => {
+    if (err) return console.error(err)
+    return res.render('edit', { restaurant: restaurant })
+  })
 })
 // 修改 Todo
-app.post('/todos/:id/edit', (req, res) => {
-  res.send('修改 Todo')
-})
-// 刪除 Todo
-app.post('/todos/:id/delete', (req, res) => {
-  res.send('刪除 Todo')
+app.post('/restaurants/:id/edit', (req, res) => {
+  RestaurantlistDB.findById(req.params.id, (err, restaurant) => {
+    if (err) return console.error(err)
+    restaurant.name = req.body.name
+    restaurant.name_en = req.body.name_en
+    restaurant.category = req.body.category
+    restaurant.image = req.body.image
+    restaurant.location = req.body.location
+    restaurant.phone = req.body.phone
+    restaurant.google_map = req.body.google_map
+    restaurant.rating = req.body.rating
+    restaurant.description = req.body.description
+    restaurant.save(err => {
+      if (err) return console.error(err)
+      return res.redirect(`/restaurants/${req.params.id}`)
+    })
+  })
 })
 
+// 刪除 Todo
+app.post('/restaurants/:id/delete', (req, res) => {
+  RestaurantlistDB.findById(req.params.id, (err, restaurant) => {
+    if (err) return console.error(err)
+    restaurant.remove(err => {
+      if (err) return console.error(err)
+      return res.redirect('/')
+    })
+  })
+})
 
 
 app.listen(port, () => {

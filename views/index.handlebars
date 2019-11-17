@@ -39,8 +39,10 @@
                   <i class="fas fa-star fa-xs"></i>
                 </span>
                 <a href="/restaurants/{{this.id}}">detail</a>
-                <a href="#">edit</a>
-                <button type="submit">delete</button>
+                <a href="/restaurants/{{this.id}}/edit">edit</a>
+                <form action="/restaurants/{{{this.id}}}/delete" method="POST" style="display: inline;">
+                  <button type="submit">delete</button>
+                </form>
               </div>
             </div>
           </a>
