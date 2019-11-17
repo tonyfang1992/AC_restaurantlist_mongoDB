@@ -1,12 +1,41 @@
 <form action="/restaurants" method="POST">
-  <input type="text" placeholder="name" name="name">
-  <input type="text" placeholder="name_en" name="name_en">
-  <input type="text" placeholder="category" name="category">
-  <input type="text" placeholder="image" name="image">
-  <input type="text" placeholder="location" name="location">
-  <input type="text" placeholder="phone" name="phone">
-  <input type="text" placeholder="google_map" name="google_map">
-  <input type="text" placeholder="rating" name="rating">
-  <input type="text" placeholder="description" name="description">
-  <button type="submit">Create</button>
+  <div class="form-row">
+    <div class="form-group col-md-3 ">
+      <label for="edit_image">餐廳名稱</label>
+      <input type="text" placeholder="name" name="name">
+    </div>
+    <div class="form-group col-md-3 ">
+      <label for="edit_image">餐廳英文名稱</label>
+      <input type="text" placeholder="name_en" name="name_en">
+    </div>
+    <div class="form-group col-md-3 ">
+      <label for="edit_image">餐廳類別</label>
+      <input type="text" placeholder="category" name="category">
+    </div>
+    <div class="form-group col-md-3 ">
+      <label for="edit_image">餐廳圖片</label>
+      <input type="text" placeholder="image" name="image">
+    </div>
+    <div class="form-group col-md-3 ">
+      <label for="edit_image">餐廳地址</label>
+      <input type="text" placeholder="location" name="location">
+    </div>
+    <div class="form-group col-md-3 ">
+      <label for="edit_image">餐廳電話</label>
+      <input type="text" placeholder="phone" name="phone">
+    </div>
+    <div class="form-group col-md-3 ">
+      <label for="edit_image">google地圖網址</label>
+      <input type="text" placeholder="google_map" name="google_map">
+    </div>
+    <div class="form-group col-md-3 ">
+      <label for="edit_image">餐廳評分</label>
+      <input type="text" placeholder="rating" name="rating">
+    </div>
+    <div class="form-group col-md-3 ">
+      <label for="edit_image">餐廳描述</label>
+      <input type="text" placeholder="description" name="description">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success">加入口袋餐廳</button>
 </form>

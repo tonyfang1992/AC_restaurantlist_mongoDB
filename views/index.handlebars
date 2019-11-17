@@ -38,10 +38,12 @@
                   {{this.rating}}
                   <i class="fas fa-star fa-xs"></i>
                 </span>
-                <a href="/restaurants/{{this.id}}">detail</a>
-                <a href="/restaurants/{{this.id}}/edit">edit</a>
-                <form action="/restaurants/{{{this.id}}}/delete" method="POST" style="display: inline;">
-                  <button type="submit">delete</button>
+                <a href="/restaurants/{{this.id}}" class="btn btn-primary  active" role="button"
+                  aria-pressed="true">查看</a>
+                <a href="/restaurants/{{this.id}}/edit" class="btn btn-primary  active" role="button"
+                  aria-pressed="true">修改</a>
+                <form action="/restaurants/{{{this.id}}}/delete" method="POST" style="display: inline-block;">
+                  <button type="submit" class="btn btn-danger">刪除</button>
                 </form>
               </div>
             </div>
