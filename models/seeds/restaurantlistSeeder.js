@@ -20,7 +20,6 @@ db.once('open', () => {
 
   for (var i = 0; i < restaurantresults.length; i++) {
     restaurant_mongodbSchema.create({
-      id: restaurantresults[i].id,
       name: restaurantresults[i].name,
       name_en: restaurantresults[i].name_en,
       category: restaurantresults[i].category,

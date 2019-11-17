@@ -2,13 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const restaurantlistSchema = new Schema({
-  id: {
-    type: String,             // 資料型別是字串
-    required: true            // 這是個必填欄位
-  },
+
   name: {
-    type: String,
-    required: true
+    type: String,         // 資料型別是字串
+    required: true        // 這是個必填欄位
   },
   name_en: {
     type: String,

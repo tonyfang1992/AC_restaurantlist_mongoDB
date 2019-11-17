@@ -3,6 +3,11 @@ const app = express()
 const port = 3000
 const mongoose = require('mongoose')   //載入 mongoose
 const exphbs = require('express-handlebars')
+// 引用 body-parser
+const bodyParser = require('body-parser');
+// 設定 bodyParser
+app.use(bodyParser.urlencoded({ extended: true }));
+// ...
 
 mongoose.connect('mongodb://localhost/restaurantList', { useNewUrlParser: true, useUnifiedTopology: true })  //設定沿線到 mongoDB
 
@@ -42,6 +47,55 @@ app.get('/search', (req, res) => {
 
 
 })
+
+//新增新的餐廳
+app.get('/restaurant/new', (req, res) => {
+  return res.render('new')
+})
+
+app.post('/restaurants', (req, res) => {
+  // 建立 restaurants model 實例
+
+  const restaurant = new RestaurantlistDB({
+    name: req.body.name,    // name 是從 new 頁面 form 傳過來
+    name_en: req.body.name_en,
+    category: req.body.category,
+    image: req.body.image,
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.google_map,
+    rating: req.body.rating,
+    description: req.body.description
+  })
+  // 存入資料庫
+  restaurant.save(err => {
+    if (err) return console.error(err)
+    return res.redirect('/')  // 新增完成後，將使用者導回首頁
+  })
+})
+
+// 顯示一筆 Todo 的詳細內容
+app.get('/restaurants/:id', (req, res) => {
+  RestaurantlistDB.findById(req.params.id, (err, restaurants) => {
+    if (err) return console.error(err)
+    return res.render('show', { restaurants: restaurants })
+  })
+})
+
+// 修改 Todo 頁面
+app.get('/todos/:id/edit', (req, res) => {
+  res.send('修改 Todo 頁面')
+})
+// 修改 Todo
+app.post('/todos/:id/edit', (req, res) => {
+  res.send('修改 Todo')
+})
+// 刪除 Todo
+app.post('/todos/:id/delete', (req, res) => {
+  res.send('刪除 Todo')
+})
+
+
 
 app.listen(port, () => {
   console.log('the web is runnung')
