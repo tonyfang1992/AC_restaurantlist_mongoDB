@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('passport')
+const flash = require('connect-flash')             // 載入 connect-flash   
 app.use(bodyParser.urlencoded({ extended: true }));
 // ...
 
@@ -30,6 +31,7 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(flash())                                                  // 使用 Connect flash
 
 require('./config/passport')(passport)
 
@@ -50,7 +52,16 @@ db.once('open', () => {
 
 // 載入 restaurantList model
 const RestaurantlistDB = require('./models/restaurantList.js')
+// 建立 local variables
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  res.locals.isAuthenticated = req.isAuthenticated()    // 辨識使用者是否已經登入的變數，讓 view 可以使用
 
+  // 新增兩個 flash message 變數 
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
+  next()
+})
 
 
 app.get('/search', (req, res) => {
