@@ -7,7 +7,7 @@ router.get('/login', (req, res) => {
   res.render('login')
 })
 //登入請求
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/users/login'
