@@ -3,12 +3,15 @@ const express = require('express')
 const router = express.Router()
 const RestaurantlistDB = require('../models/restaurantList')
 
+// 載入 auth middleware
+const { authenticated } = require('../config/auth')
+
 //新增新的餐廳
-router.get('/new', (req, res) => {
+router.get('/new', authenticated, (req, res) => {
   return res.render('new')
 })
 
-router.post('/', (req, res) => {
+router.post('/', authenticated, (req, res) => {
   // 建立 restaurants model 實例
 
   const restaurant = new RestaurantlistDB({
@@ -30,7 +33,7 @@ router.post('/', (req, res) => {
 })
 
 // 顯示一筆 Todo 的詳細內容
-router.get('/:id', (req, res) => {
+router.get('/:id', authenticated, (req, res) => {
   RestaurantlistDB.findById(req.params.id, (err, restaurants) => {
     if (err) return console.error(err)
     return res.render('show', { restaurants: restaurants })
@@ -38,14 +41,14 @@ router.get('/:id', (req, res) => {
 })
 
 // 修改 Todo 頁面
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', authenticated, (req, res) => {
   RestaurantlistDB.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
     return res.render('edit', { restaurant: restaurant })
   })
 })
 // 修改 Todo
-router.put('/:id/edit', (req, res) => {
+router.put('/:id/edit', authenticated, (req, res) => {
   RestaurantlistDB.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.name = req.body.name
@@ -65,7 +68,7 @@ router.put('/:id/edit', (req, res) => {
 })
 
 // 刪除 Todo
-router.delete('/:id/delete', (req, res) => {
+router.delete('/:id/delete', authenticated, (req, res) => {
   RestaurantlistDB.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.remove(err => {

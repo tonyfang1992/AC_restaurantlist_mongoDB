@@ -2,7 +2,7 @@ const LocalStrategy = require('passport-local').Strategy
 const mongoose = require('mongoose')
 
 const User = require('../models/user')
-module.export = passport => {
+module.exports = passport => {
   passport.use(
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
       User.findOne({
