@@ -1,5 +1,8 @@
 const express = require('express')
 const app = express()
+if (process.env.NODE_ENV !== 'production') {      // 如果不是 production 模式
+  require('dotenv').config()                      // 使用 dotenv 讀取 .env 檔案
+}
 const port = 3000
 const mongoose = require('mongoose')   //載入 mongoose
 const exphbs = require('express-handlebars')
@@ -62,6 +65,7 @@ app.get('/search', (req, res) => {
 app.use('/', require('./routes/home'))
 app.use('/restaurants', require('./routes/restaurantlist_routes'))
 app.use('/users', require('./routes/user'))
+app.use('/auth', require('./routes/auths'))    // 把 auth route 加進來
 
 
 app.listen(port, () => {
