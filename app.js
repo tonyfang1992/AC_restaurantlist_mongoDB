@@ -45,7 +45,7 @@ app.get('/search', (req, res) => {
 })
 app.use('/', require('./routes/home'))
 app.use('/restaurants', require('./routes/restaurantlist_routes'))
-app.use('/user', require('./routes/user'))
+app.use('/users', require('./routes/user'))
 
 
 app.listen(port, () => {
