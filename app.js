@@ -10,7 +10,7 @@ const passport = require('passport')
 app.use(bodyParser.urlencoded({ extended: true }));
 // ...
 
-mongoose.connect('mongodb://localhost/restaurantList', { useNewUrlParser: true, useUnifiedTopology: true })  //設定沿線到 mongoDB
+mongoose.connect('mongodb://localhost/restaurantList', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })  //設定沿線到 mongoDB
 
 //mongoose 連線透過mongoose.connection 拿到 Connection 的物件
 const db = mongoose.connection

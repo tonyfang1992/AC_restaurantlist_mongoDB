@@ -23,7 +23,8 @@ router.post('/', authenticated, (req, res) => {
     phone: req.body.phone,
     google_map: req.body.google_map,
     rating: req.body.rating,
-    description: req.body.description
+    description: req.body.description,
+    userId: req.user._id
   })
   // 存入資料庫
   restaurant.save(err => {
@@ -34,22 +35,23 @@ router.post('/', authenticated, (req, res) => {
 
 // 顯示一筆 Todo 的詳細內容
 router.get('/:id', authenticated, (req, res) => {
-  RestaurantlistDB.findById(req.params.id, (err, restaurants) => {
+  //要判斷是否為當前使用者的restaurantlist
+  RestaurantlistDB.findOne({ _id: req.params.id, userId: req.user._id }, (err, restaurants) => {
     if (err) return console.error(err)
     return res.render('show', { restaurants: restaurants })
   })
 })
 
-// 修改 Todo 頁面
+// 修改 restaurantlist 頁面
 router.get('/:id/edit', authenticated, (req, res) => {
-  RestaurantlistDB.findById(req.params.id, (err, restaurant) => {
+  RestaurantlistDB.findOne({ _id: req.params.id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
     return res.render('edit', { restaurant: restaurant })
   })
 })
-// 修改 Todo
+// 修改 restaurantlist
 router.put('/:id/edit', authenticated, (req, res) => {
-  RestaurantlistDB.findById(req.params.id, (err, restaurant) => {
+  RestaurantlistDB.findOne({ _id: req.params.id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.name = req.body.name
     restaurant.name_en = req.body.name_en
@@ -69,7 +71,7 @@ router.put('/:id/edit', authenticated, (req, res) => {
 
 // 刪除 Todo
 router.delete('/:id/delete', authenticated, (req, res) => {
-  RestaurantlistDB.findById(req.params.id, (err, restaurant) => {
+  RestaurantlistDB.findOne({ _id: req.params.id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.remove(err => {
       if (err) return console.error(err)
