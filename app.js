@@ -3,11 +3,8 @@ const app = express()
 const port = 3000
 const mongoose = require('mongoose')   //載入 mongoose
 const exphbs = require('express-handlebars')
-// 引用 body-parser
 const bodyParser = require('body-parser');
-// 引用 method-override
 const methodOverride = require('method-override')
-// 設定 bodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 // ...
 
@@ -48,6 +45,7 @@ app.get('/search', (req, res) => {
 })
 app.use('/', require('./routes/home'))
 app.use('/restaurants', require('./routes/restaurantlist_routes'))
+app.use('/user', require('./routes/user'))
 
 
 app.listen(port, () => {
