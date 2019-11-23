@@ -5,6 +5,7 @@ const mongoose = require('mongoose')   //載入 mongoose
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override')
+const session = require('express-session')
 app.use(bodyParser.urlencoded({ extended: true }));
 // ...
 
@@ -18,7 +19,11 @@ app.set('view engine', 'handlebars')
 // 設定 method-override
 app.use(methodOverride('_method'))
 app.use(express.static('public'))
-
+app.use(session({
+  secret: 'abc1122',
+  resave: false,
+  saveUninitialized: true
+}))
 //連線異常
 db.on('error', () => {
   console.log('mongoDB error!')
