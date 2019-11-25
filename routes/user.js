@@ -24,7 +24,7 @@ router.post('/register', (req, res) => {
   // 加入錯誤訊息提示
   let errors = []
 
-  if (!name || !email || !password || !password2) {
+  if (!email || !password || !password2) {
     errors.push({ message: '所有欄位都是必填' })
   }
 
