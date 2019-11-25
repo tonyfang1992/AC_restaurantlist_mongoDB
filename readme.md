@@ -3,9 +3,9 @@
 此網站網羅各種美食餐廳，詳細的餐廳資訊及評價等。
 新增註冊、FB登入功能
 測試用帳號:
-email: user1@example.com
+>- email: user1@example.com
 password: 12345678
-email: user1@example.com
+>- email: user1@example.com
 password: 12345678
 
 
